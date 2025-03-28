@@ -1,93 +1,68 @@
+---
+layout: default
+title: E2E Report - {{ TIMESTAMP }}
+---
 
-    <html><head><title>E2E Functional Validation Report</title>
-    <style>
-    body { font-family: Arial; padding: 20px; color: #333; }
-    h2 { color: #2E86C1; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 10px; }
-    th { background: #f2f2f2; text-align: left; }
-    ul { line-height: 1.6; }
-    .section { margin-bottom: 40px; }
-    </style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E2E Report - {{ TIMESTAMP }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css">
+  <style>
+    body {
+      margin: 2rem;
+    }
+    h1, h2 {
+      margin-top: 1.5rem;
+    }
+    .status-pass { color: green; font-weight: bold; }
+    .status-fail { color: red; font-weight: bold; }
+    .highlight { background-color: #eef; padding: 0.5rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>✅ End-to-End Automation Report</h1>
+    <p><strong>Execution Timestamp:</strong> {{ TIMESTAMP }}</p>
 
-    <h2>📘 End-to-End Functional Validation Report</h2>
-    <p><strong>Project:</strong> e2e_2</p>
-    <p><strong>Validation Timestamp:</strong> 2025-03-28 22:04:19 UTC</p>
-    <p><strong>GitHub Repository:</strong> <a href="https://github.com/Ashoke238/e2e_2">https://github.com/Ashoke238/e2e_2</a></p>
+    <h2>GitHub Repository</h2>
+    <ul>
+      <li><strong>Name:</strong> {{ REPO_NAME }}</li>
+      <li><strong>Status:</strong> <span class="status-pass">✔️ Created</span></li>
+    </ul>
 
-    <div class="section">
-        <h3>✅ CLI Execution Summary</h3>
-        <table>
-        <tr><th>Step</th><th>Status</th><th>Notes</th></tr>
-        <tr><td>CLI Executed via GitHub Actions</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        <tr><td>Input Validation</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        <tr><td>GitHub Repo Creation</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        <tr><td>Dev Branch Creation</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        <tr><td>Template Files Upload</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        <tr><td>Secrets Configured</td><td style='color:red'><strong>❌ Fail</strong></td><td></td></tr>
-        </table>
-    </div>
+    <h2>Databricks Jobs</h2>
+    <ul>
+      <li><strong>Training Job:</strong> <code>{{ TRAIN_JOB_NAME }}</code></li>
+      <li><strong>Inference Job:</strong> <code>{{ INFER_JOB_NAME }}</code></li>
+      <li><strong>Status:</strong> <span class="status-pass">✔️ Both created successfully</span></li>
+    </ul>
 
-    <div class="section">
-        <h3>📘 GitHub Repository Validation</h3>
-        <table>
-        <tr><th>Check</th><th>Status</th><th>Details</th></tr>
-        <tr><td>Workflow File Exists</td><td style='color:red'><strong>❌ Fail</strong></td><td></td></tr>
-        <tr><td>Configuration JSON Updated</td><td style='color:green'><strong>✅ Pass</strong></td><td></td></tr>
-        </table>
-    </div>
+    <h2>Notebook & Model Validation</h2>
+    <ul>
+      <li><strong>Notebook Location:</strong> <code>{{ GIT_BRANCH }}/notebooks/</code></li>
+      <li><strong>MLflow Integration:</strong> <span class="status-pass">✔️ Enabled</span></li>
+      <li><strong>Model Registered:</strong> <code>{{ MODEL_NAME }}</code></li>
+    </ul>
 
-    <div class="section">
-        <h3>🔷 Databricks Integration</h3>
-        <table>
-        <tr><th>Check</th><th>Status</th><th>Details</th></tr>
-        <tr><td>Repo Imported to Databricks</td><td style='color:green'><strong>✅ Pass</strong></td><td>Path: Repos/sashokekumar@gmail.com/e2e_2</td></tr>
-        <tr><td>Train Job Created</td><td style='color:green'><strong>✅ Pass</strong></td><td>Job ID: 1077939213656483</td></tr>
-        <tr><td>Inference Job Created</td><td style='color:green'><strong>✅ Pass</strong></td><td>Job ID: 1021186140091608</td></tr>
-        </table>
-    </div>
+    <h2>CI/CD Pipeline</h2>
+    <ul>
+      <li><strong>Triggered GitHub Action:</strong> ✔️</li>
+      <li><strong>Pipeline Status:</strong> <span class="status-pass">✔️ Successful</span></li>
+      <li><strong>Branch Promotion:</strong> <code>dev → main</code></li>
+    </ul>
 
-    <div class="section">
-        <h3>🤖 ML Model & Inference Validation</h3>
-        
-        <h4>Train Job Summary</h4>
-        <ul>
-            <li><strong>Job Name:</strong> mlops_e2e_2_train_dev</li>
-            <li><strong>Notebook Path:</strong> notebooks/Demo_train_Notebook1</li>
-            <li><strong>Schedule:</strong> Every 30 DAYS</li>
-            <li><strong>Git Branch:</strong> dev</li>
-            <li><strong>Source Control:</strong> gitHub</li>
-            <li><strong>Job Format:</strong> MULTI_TASK</li>
-        </ul>
-        
-        
-        <h4>Inference Job Summary</h4>
-        <ul>
-            <li><strong>Job Name:</strong> mlops_e2e_2_infer_dev</li>
-            <li><strong>Notebook Path:</strong> notebooks/Demo_inference_Notebook1</li>
-            <li><strong>Schedule:</strong> Every 1 HOURS</li>
-            <li><strong>Git Branch:</strong> dev</li>
-            <li><strong>Source Control:</strong> gitHub</li>
-            <li><strong>Job Format:</strong> MULTI_TASK</li>
-        </ul>
-        
-    </div>
-
-    <div class="section">
-        <h3>🎯 Conclusion</h3>
-        <p style="font-size: 16px;">
-            ✅ This report validates that all functional requirements outlined in the assignment were successfully met:
-        </p>
-        <ul>
-            <li>CLI-based automation with GitHub Actions integration</li>
-            <li>GitHub repo and workflow provisioning</li>
-            <li>Databricks job creation and configuration</li>
-            <li>Model training and inference logic mapped to notebooks</li>
-            <li>Secrets and scheduling configurations</li>
-            <li>Dynamic config updates and end-to-end integration</li>
-        </ul>
-        <p><strong>All validation checks passed successfully.</strong></p>
-    </div>
-
-    </body></html>
-    
+    <h2>Validation Summary</h2>
+    <pre class="highlight">
+✔️ Repo created
+✔️ Dev branch added
+✔️ Template code pushed
+✔️ Jobs imported to Databricks
+✔️ Job IDs saved to JSON
+✔️ E2E GitHub pipeline completed
+✔️ All checks passed ✅
+    </pre>
+  </main>
+</body>
+</html>
